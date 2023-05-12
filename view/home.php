@@ -11,7 +11,7 @@
 </head>
 <body class="container">
  <?php
-  include("./utilities/navbar.php")
+  include("./others/navbar.php")
  ?>
  <div class="container my-5">
     <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">

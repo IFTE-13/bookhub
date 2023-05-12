@@ -43,6 +43,42 @@
         return $sql;
     }
 
+    function SHOWALLSELL(){
+        $connection = connection();
+        $sql = oci_parse($connection,"select SELLID, MEMBERID, BOOKID, PURCHASE from SELL") ;
+        $res = oci_execute($sql);
+        return $sql;
+    }
+
+    function SHOWSOLDHISTORY(){
+        $connection = connection();
+        $sql = oci_parse($connection,"select TITLE, SOLD_COPIES from BOOK_SELL_HISTORY") ;
+        $res = oci_execute($sql);
+        return $sql;
+    }
+
+    function SHOWENGLISHBOOK(){
+        $connection = connection();
+        $sql = oci_parse($connection,"select BOOKID, TITLE, AUTHOR from ENGLISH_BOOK") ;
+        $res = oci_execute($sql);
+        return $sql;
+    }
+
+    function SHOWSPECIALBOOKS(){
+        $connection = connection();
+        $sql = oci_parse($connection,"select TITLE, AUTHOR, PUBLICATION from SPECAIL_BOOKS") ;
+        $res = oci_execute($sql);
+        return $sql;
+    }
+
+    if(isset($_POST['sell'])){
+        $MEMBERID = $_REQUEST['memberid'];
+        $BOOKID = $_REQUEST['bookid'];
+        $connection = connection();
+        $query = oci_parse($connection, "INSERT INTO SELL VALUES (SELL_SEQ.NEXTVAL, '$MEMBERID', '$BOOKID', SYSDATE)");
+        $result = oci_execute($query);
+    }
+
     // Add or register new member in the system
     if(isset($_POST['register'])){
         $NAME = $_REQUEST['name'];
@@ -51,6 +87,14 @@
         $PHONE = $_REQUEST['phone'];
         $connection = connection();
         $query = oci_parse($connection, "INSERT INTO MEMBER VALUES (USER_SEQ.NEXTVAL, '$NAME', '$ADDRESS', '$EMAIL', '0000', '$PHONE')");
+        $result = oci_execute($query);
+    }
+
+    if(isset($_POST['sell'])){
+        $MEMBERID = $_REQUEST['memberid'];
+        $BOOKID = $_REQUEST['bookid'];
+        $connection = connection();
+        $query = oci_parse($connection, "INSERT INTO SELL VALUES (SELL_SEQ.NEXTVAL, '$MEMBERID', '$BOOKID', SYSDATE)");
         $result = oci_execute($query);
     }
 
@@ -87,5 +131,15 @@
             $result = oci_execute($query);
         }
     }
-        
+
+    if(isset($_POST['search'])){
+        function SEARCHBOOK(){
+            $DATA = $_REQUEST['data'];
+            $connection = connection();
+            $query = oci_parse($connection, "SELECT BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE, AVAILABLECOPIES FROM BOOK WHERE TITLE LIKE '$DATA%' ");
+            $result = oci_execute($query);
+            return $result;
+        }
+    }
+      
 ?>
