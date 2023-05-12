@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="../bootstrap.css">
     <script src="../bootstrap.js"></script>
+    <title>Admin/Setting</title>
 </head>
 <body>
 <div class="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
@@ -58,34 +59,19 @@
                 <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
                 <h1>X</h1>
             </button>
-            <div class="container mt-5 pt-5">
-            <h1>ADMINS</h1>
-            <div class="d-flex justify-content-center">
-                <table class="table table-success table-striped">
-                    <thead>
-                        <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">EMAIL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <?php
-                        $res = SHOWALLADMIN();
-                        while ($row = oci_fetch_array($res, OCI_RETURN_NULLS+OCI_ASSOC)) {
-                            
-                            echo '<tr>';
-                            foreach ($row as $item) 
-                            {
-                                echo '<td>'.($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp').'</td>';
-                            }
-                            echo '</tr>';
-                            }
-                    ?>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+            
+            <div class="container" style="width: 70vh">
+                <h1>Settings</h1>
+                <form class="text-center border border-light p-5" method="POST">
+
+                <p class="h4 mb-4">Change Password</p>
+
+                <input type="text" name="newPassword" class="form-control mb-4" placeholder="new password">
+                <input type="text" name="confirmPassword" class="form-control mb-4" placeholder="confirm password">
+
+                <button class="btn btn-info my-4 btn-block" type="submit" name="changeAdminPassword">Change</button>
+                </form>
             </div>
             
 </body>

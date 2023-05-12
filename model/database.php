@@ -36,6 +36,13 @@
         return $sql;
     }
 
+    function SHOWALLWRITERS(){
+        $connection = connection();
+        $sql = oci_parse($connection,"select WRITERID, NAME, NATIONALITY, DATEOFBIRTH, BIOGRAPHY from WRITER") ;
+        $res = oci_execute($sql);
+        return $sql;
+    }
+
     // Add or register new member in the system
     if(isset($_POST['register'])){
         $NAME = $_REQUEST['name'];
@@ -58,6 +65,27 @@
         $connection = connection();
         $query = oci_parse($connection, "INSERT INTO BOOK VALUES (BOOK_SEQ.NEXTVAL, '$TITLE', '$AUTHOR', TO_DATE('$PUBLICATION', 'YYYY-MM-DD'), '$LANGUAGE', $AVAILABLE, $TOTAL)");
         $result = oci_execute($query);
+    }
+
+    if(isset($_POST['registerWriter'])){
+        $NAME = $_REQUEST['name'];
+        $NATIONALITY = $_REQUEST['nationality'];
+        $DATEOFBIRTH = $_REQUEST['dateofbirth'];
+        $DIOGRAPHY = $_REQUEST['biography'];
+        $connection = connection();
+        $query = oci_parse($connection, "INSERT INTO WRITER VALUES (WRITER_SEQ.NEXTVAL, '$NAME', '$NATIONALITY', TO_DATE('$DATEOFBIRTH', 'YYYY-MM-DD'), '$DIOGRAPHY')");
+        $result = oci_execute($query);
+    }
+
+    // Admin password update
+    if(isset($_POST['changeAdminPassword'])){
+        $NEW = $_REQUEST['newPassword'];
+        $CONFIRM = $_REQUEST['confirmPassword'];
+        if($NEW === $CONFIRM){
+            $connection = connection();
+            $query = oci_parse($connection, "UPDATE ADMIN SET PASSWORD = $NEW WHERE ID = 1001");
+            $result = oci_execute($query);
+        }
     }
         
 ?>

@@ -41,7 +41,7 @@
                     <i class="fs-5 bi-table"></i><span class="ms-1 d-none d-sm-inline">Admins</span></a>
             </li>
             <li>
-                <a href="./adminSettign.php" class="nav-link text-truncate">
+                <a href="./adminSetting.php" class="nav-link text-truncate">
                     <i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">Settings</span></a>
             </li>
             <li>

@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="../bootstrap.css">
     <script src="../bootstrap.js"></script>
+    <title>Admin/Writer</title>
 </head>
 <body>
 <div class="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
@@ -58,20 +59,44 @@
                 <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
                 <h1>X</h1>
             </button>
+
+            
+            <div class="container">
+                <h1>Writers</h1>
+                <form class="text-center border border-light p-5" method="POST">
+
+                <p class="h4 mb-4">New Writer</p>
+
+                <input type="text" name="name" class="form-control mb-4" placeholder="Twilight">
+                <input type="text" name="nationality" class="form-control mb-4" placeholder="Bangladeshi">
+                <input type="date" name="dateofbirth" class="form-control mb-4">
+                <input type="text" name="biography" class="form-control mb-4" placeholder="Description">
+
+                <button class="btn btn-info my-4 btn-block" type="submit" name="registerWriter">Register</button>
+                <?php 
+                    $restrationError;
+                ?>
+                </form>
+            </div>
+
+
             <div class="container mt-5 pt-5">
-            <h1>ADMINS</h1>
-            <div class="d-flex justify-content-center">
+            <div>
                 <table class="table table-success table-striped">
                     <thead>
                         <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">EMAIL</th>
+                        <th scope="col">WRITER ID</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">NATIONALITY</th>
+                        <th scope="col">DATE OF BIRTH</th>
+                        <th scope="col">BIOGRAPHY</th>
+                        <th scope="col">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                         <?php
-                        $res = SHOWALLADMIN();
+                        $res = SHOWALLWRITERS();
                         while ($row = oci_fetch_array($res, OCI_RETURN_NULLS+OCI_ASSOC)) {
                             
                             echo '<tr>';
