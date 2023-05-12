@@ -20,7 +20,7 @@
             oci_execute($s);
             $row = oci_fetch_all($s, $res);
             if($row){
-                    header("location: http://localhost/bookhub/view/admin/dashboard.php");
+                    header("location: http://localhost/bookhub/view/admin/adminProfile.php");
             }else{
                 $loginError = "wrong password or username";
             }
