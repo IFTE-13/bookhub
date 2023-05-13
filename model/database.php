@@ -30,10 +30,20 @@
     }
 
     function SHOWALLBOOKS(){
-        $connection = connection();
-        $sql = oci_parse($connection,"select BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE, AVAILABLECOPIES, TOTALCOPIES from BOOK") ;
+        
+    $connection = connection();  
+    if(isset($_POST['search'])){
+        $DATA = strtoupper($_REQUEST['data']);
+        $sql = oci_parse($connection, "SELECT BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE FROM BOOK WHERE TITLE LIKE '%$DATA%' OR AUTHOR LIKE'%$DATA%'");
         $res = oci_execute($sql);
         return $sql;
+        echo $DATA;
+
+    } else {
+        $sql = oci_parse($connection,"select BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE from BOOK") ;
+        $res = oci_execute($sql);
+        return $sql;
+        }
     }
 
     function SHOWALLWRITERS(){
@@ -129,16 +139,6 @@
             $connection = connection();
             $query = oci_parse($connection, "UPDATE ADMIN SET PASSWORD = $NEW WHERE ID = 1001");
             $result = oci_execute($query);
-        }
-    }
-
-    if(isset($_POST['search'])){
-        function SEARCHBOOK(){
-            $DATA = $_REQUEST['data'];
-            $connection = connection();
-            $query = oci_parse($connection, "SELECT BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE, AVAILABLECOPIES FROM BOOK WHERE TITLE LIKE '$DATA%' ");
-            $result = oci_execute($query);
-            return $result;
         }
     }
       

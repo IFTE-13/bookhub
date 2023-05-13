@@ -6,37 +6,38 @@
 <head>
     <link rel="stylesheet" href="../bootstrap.css">
     <script src="../bootstrap.js"></script>
-    <title>Views</title>
+    <title>Book Collection</title>
 </head>
-<body>
+<body class="container">
 <?php
   include("navbar.php")
  ?>
-    <div class="d-flex justify-content-center container">
+    <h2 class="text-center mt-5">Book Collection</h2>
+    <div class="d-flex justify-content-end container">
         
-      <form class="d-flex" role="search" method="POST">
+      <form class="d-flex  mt-5" role="search" method="POST">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="data">
         <button class="btn btn-outline-success" type="submit" name="search">Search</button>
       </form>
     </div>
 
-    <div class="container mt-5 pt-5">
+    <div class="container mt-3">
                 <div>
                     <table class="table table-success table-striped">
                         <thead>
                             <tr>
-                            <th scope="col">USERID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">ADDRESS</th>
-                            <th scope="col">EMAIL</th>
-                            <th scope="col">PHONE</th>
+                            <th scope="col">BOOK ID</th>
+                            <th scope="col">TITLE</th>
+                            <th scope="col">AUTHOR</th>
+                            <th scope="col">PUBLICATION</th>
+                            <th scope="col">LANGUAGE</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                             <?php
-                            $res = SEARCHBOOK();
-                            while ($row = oci_fetch_array($res, OCI_RETURN_NULLS+OCI_ASSOC)) {
+                            $res = SHOWALLBOOKS();
+                            while ($row = oci_fetch_array($res, OCI_RETURN_NULLS | OCI_ASSOC)) {
                                 
                                 echo '<tr>';
                                 foreach ($row as $item) 
