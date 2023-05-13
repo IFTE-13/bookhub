@@ -12,6 +12,7 @@ end if;
 end;
 
 declare
+
 boo_K book.bookid%type;
 book_id book.bookid%type := :BOOK_ID;
 begin
