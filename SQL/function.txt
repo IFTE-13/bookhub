@@ -1,0 +1,20 @@
+========================= function checking book exixt of not ============================
+create or replace function bookExist(bookno book.bookid%type) 
+return number 
+is
+value book.bookid%type; 
+
+begin 
+select bookid into value from book where bookid = bookno; 
+if value is null then return 0; 
+else return 1; 
+end if; 
+end;
+
+declare
+boo_K book.bookid%type;
+book_id book.bookid%type := :BOOK_ID;
+begin
+boo_K := bookExist (book_id);
+dbms_output.put_line('Book Exist');
+end;

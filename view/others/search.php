@@ -36,7 +36,7 @@
                         <tbody>
                             <tr>
                             <?php
-                            $res = SHOWALLBOOKS();
+                            $res = SHOWCOLLECTION();
                             while ($row = oci_fetch_array($res, OCI_RETURN_NULLS | OCI_ASSOC)) {
                                 
                                 echo '<tr>';

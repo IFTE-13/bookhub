@@ -9,9 +9,12 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap.css">
 </head>
 <body>
-<?php
-  include("./others/navbar.php")
- ?>
+  <div class="container">
+      <?php
+      include("./others/navbar.php")
+    ?>
+  </div>
+
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-lg-5 py-5">
       <div class="col-lg-7 text-center text-lg-start">

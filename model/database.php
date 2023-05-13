@@ -22,14 +22,23 @@
         return $sql;
     }
 
-    function SHOWALLMEMBERS(){
-        $connection = connection();
-        $sql = oci_parse($connection,"select USERID, NAME, ADDRESS, EMAIL, PHONE from MEMBER") ;
+    function SHOWALLBOOKS(){
+        
+    $connection = connection();  
+    if(isset($_POST['searchFromBooks'])){
+        $DATA = strtoupper($_REQUEST['data']);
+        $sql = oci_parse($connection, "SELECT BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE, AVAILABLECOPIES, TOTALCOPIES FROM BOOK WHERE TITLE LIKE '%$DATA%' OR AUTHOR LIKE'%$DATA%'");
         $res = oci_execute($sql);
         return $sql;
-    }
 
-    function SHOWALLBOOKS(){
+    } else {
+        $sql = oci_parse($connection,"select BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE, AVAILABLECOPIES, TOTALCOPIES from BOOK") ;
+        $res = oci_execute($sql);
+        return $sql;
+        }
+    }
+    
+    function SHOWCOLLECTION(){
         
     $connection = connection();  
     if(isset($_POST['search'])){
@@ -37,10 +46,27 @@
         $sql = oci_parse($connection, "SELECT BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE FROM BOOK WHERE TITLE LIKE '%$DATA%' OR AUTHOR LIKE'%$DATA%'");
         $res = oci_execute($sql);
         return $sql;
-        echo $DATA;
 
     } else {
         $sql = oci_parse($connection,"select BOOKID, TITLE, AUTHOR, PUBLICATION, LANGUAGE from BOOK") ;
+        $res = oci_execute($sql);
+        return $sql;
+        }
+    }
+
+
+    function SHOWALLMEMBERS(){
+        
+    $connection = connection();  
+    if(isset($_POST['searchFromMembers'])){
+        $DATA = strtoupper($_REQUEST['data']);
+        $sql = oci_parse($connection, "SELECT USERID, NAME, ADDRESS, EMAIL, PHONE from MEMBER WHERE NAME LIKE '%$DATA%' OR EMAIL LIKE '%$DATA%' OR USERID LIKE '%$DATA%'");
+        $res = oci_execute($sql);
+        return $sql;
+
+    } else {
+        $connection = connection();
+        $sql = oci_parse($connection,"select USERID, NAME, ADDRESS, EMAIL, PHONE from MEMBER") ;
         $res = oci_execute($sql);
         return $sql;
         }

@@ -82,7 +82,15 @@
             </div>
 
 
-            <div class="container mt-5 pt-5">
+            <div class="d-flex justify-content-between container">
+                <h3>Book List</h3>
+                <form class="d-flex" role="search" method="POST">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="data">
+                    <button class="btn btn-outline-success" type="submit" name="searchFromBooks">Search</button>
+                </form>
+            </div>
+
+            <div class="container mt-3">
             <div>
                 <table class="table table-success table-striped">
                     <thead>

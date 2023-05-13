@@ -79,8 +79,16 @@
                 </form>
             </div>
 
+            <div class="d-flex justify-content-between container">
+                <h3>Members</h3>
+                <form class="d-flex" role="search" method="POST">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="data">
+                    <button class="btn btn-outline-success" type="submit" name="searchFromMembers">Search</button>
+                </form>
+            </div>
 
-            <div class="container mt-5 pt-5">
+
+            <div class="container mt-3">
                 <div>
                     <table class="table table-success table-striped">
                         <thead>
