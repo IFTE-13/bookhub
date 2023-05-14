@@ -19,3 +19,69 @@ begin
 boo_K := bookExist (book_id);
 dbms_output.put_line('Book Exist');
 end;
+
+========================= function checking writer exixt of not ============================
+create or replace function writerExist(writerno writer.writerid%type) 
+return number 
+is
+value writer.writerid%type; 
+
+begin 
+select writerid into value from writer where writerid = writerno; 
+if value is null then return 0; 
+else return 1; 
+end if; 
+end;
+
+declare
+write_r writer.writerid%type;
+writer_id writer.writerid%type := :WRITER_ID;
+begin
+write_r := writerExist(writer_id);
+dbms_output.put_line('WRITER Exist');
+end;
+
+
+
+========================= function checking member exixt of not ============================
+create or replace function memberExist(memberno member.userid%type) 
+return number 
+is
+value member.userid%type; 
+
+begin 
+select userid into value from member where userid = memberno; 
+if value is null then return 0; 
+else return 1; 
+end if; 
+end;
+
+declare
+write_r member.userid%type;
+member_id member.userid%type := :member_ID;
+begin
+write_r := memberExist(member_id);
+dbms_output.put_line('Member Exist');
+end;
+
+========================= cursor for loop for printing all admins ============================
+DECLARE
+ CURSOR C1
+ is
+ SELECT ID, EMAIL FROM ADMIN;
+ i NUMBER(3);
+ aid admin.id%type;
+ aemail admin.email%type;
+
+Begin
+ for i in C1 loop
+ aid := i.id;
+ aemail := i.email;
+
+
+ dbms_output.put_line('Empno: ' || aid || ' SALARY: ' || aemail);
+
+
+end loop;
+
+end;
